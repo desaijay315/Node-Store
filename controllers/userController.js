@@ -43,10 +43,21 @@ exports.register = async(req,res,next) => {
   next(); // pass to auth controller.ogin
 };
 
+exports.account = (req,res) =>{
+	res.render('account', {title: 'Edit Your Account'});
+};
 
+exports.updateAccount = async (req,res) =>{
+const update = {
+	name : req.body.name,
+	email:req.body.email
+}
+const user = await User.findOneAndUpdate(
+      {_id  : req.user._id},
+      {$set : update},
+      {new : true, runValidators : true, context : 'query'}
 
-
-
-
-
-
+      );
+// res.json(user);
+   res.redirect('back');
+};

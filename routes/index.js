@@ -8,7 +8,7 @@ const {catchErrors}  = require('../handlers/errorHandlers');
 // Do work here
 router.get('/', storeController.getStores);
 router.get('/stores', storeController.getStores);
-router.get('/add', storeController.addStore);
+router.get('/add',authController.isLoggedIn, storeController.addStore);
 
 router.post('/add',
   storeController.upload, 
@@ -39,11 +39,35 @@ router.get('/register', userController.registerForm);
 //we need to log them in
 
 router.post('/register',
- userController.validateRegister, userController.register,
+ userController.validateRegister, 
+ catchErrors(userController.register),
  authController.login
  );
 
 router.get('/logout', authController.logout);
+
+
+//user accounts
+router.get('/account',authController.isLoggedIn, userController.account);
+router.post('/account', catchErrors(userController.updateAccount));
+
+// /forgotpasswrod
+
+router.post('/account/forgot', catchErrors(authController.forgot));
+
+router.get('/account/reset/:token', catchErrors(authController.FindUser), authController.reset);
+
+router.post('/account/reset/:token',
+           authController.confirmPasswords, 
+           catchErrors(authController.FindUser),
+           catchErrors(authController.update)
+           );
+
+
+//api
+
+router.get('/api/search', catchErrors(storeController.searchStores))
+
 
 
 module.exports = router;
