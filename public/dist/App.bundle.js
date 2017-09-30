@@ -1041,13 +1041,13 @@ var axios = __webpack_require__(2);
 
 
 var mapOptions = {
-  center: { lat: 43.2, lng: -79.8 },
+  center: { lat: 19.2122535, lng: 72.83923479999999 },
   zoom: 10
 };
 
 function loadPlaces(map) {
-  var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 43.2;
-  var lng = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -79.8;
+  var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 19.2122535;
+  var lng = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 72.83923479999999;
 
   // body...
   axios.get('/api/stores/near?lat=' + lat + '&lng=' + lng).then(function (res) {
@@ -1096,6 +1096,8 @@ function makeMap(mapDiv) {
   }
 
   var map = new google.maps.Map(mapDiv, mapOptions);
+  console.log("hii " + mapOptions.lat);
+  console.log("h " + mapOptions.lng);
   loadPlaces(map);
 
   var input = (0, _bling.$)('[name="geolocate"]');
