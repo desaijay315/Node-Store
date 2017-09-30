@@ -2,7 +2,7 @@ const axios = require('axios');
 import  {$} from './bling';
 
 const mapOptions = {
-	center : {lat: 43.2 , lng: -79.8 },
+	center : {lat: 72.8, lng: 19.1 },
 	zoom: 10
 }
 
