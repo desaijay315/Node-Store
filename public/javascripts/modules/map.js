@@ -2,11 +2,11 @@ const axios = require('axios');
 import  {$} from './bling';
 
 const mapOptions = {
-	center : {lat:19.1, lng:  72.8 },
+	center : {lat:19.2122535, lng:72.83923479999999   },
 	zoom: 10
 }
 
-function loadPlaces (map, lat= 19.1, lng=  72.8) {
+function loadPlaces (map, lat= 19.2122535, lng=72.83923479999999 ) {
 	// body...
      axios.get(`/api/stores/near?lat=${lat}&lng=${lng}`)
              .then(res =>{
@@ -58,6 +58,8 @@ function makeMap(mapDiv){
   } 
 
  const map = new google.maps.Map(mapDiv, mapOptions);
+ console.log("hii " + mapOptions.lat);
+ console.log("h " + mapOptions.lng);
  loadPlaces(map);
 
  const input = $('[name="geolocate"]');
